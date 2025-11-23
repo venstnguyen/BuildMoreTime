@@ -3,7 +3,42 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+//Example Courses
 
+const defaultCourses: Course[] = [
+  {
+    id: "First Class",
+    name: "Algorithms",
+    code: "CSCI 411",
+    color: "Blue",
+    semester: "Fall 2024",
+    daysOfTheWeek: ["Monday", "Wednesday"],
+    startTime: "9:00",
+    endTime: "10:00",
+    location: "CSM"
+  },
+
+  {
+    id: "Second Class",
+    name: "OS",
+    code: "CSCI 457",
+    color: "Green",
+    semester: "Fall 2024",
+    daysOfTheWeek: ["Monday", "Wednesday"],
+    startTime: "11:00",
+    endTime: "12:00",
+    location: "CSM"
+  },
+];
+
+//Example Task
+
+const defaultTasks: Task[] = [
+  {
+    id: "task1",
+    courseId: ""
+  }
+]
 
 
 function App() {
