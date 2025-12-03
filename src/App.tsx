@@ -3,12 +3,13 @@ import type { Course } from "./Models/Course";
 import type { Task } from "./Models/Task";
 import { CourseList } from "./Components/CourseList";
 import { TaskList } from "./Components/TaskList";
+import { Layout } from "./Components/Layout"
 
 const defaultCourses: Course[] = [
   {
     id: "course1",
     name: "Algorithms",
-    code: "CSCI 406",
+    code: "CSCI 411",
     color: "#1565c0",
     semester: "Fall 2024",
     daysOfTheWeek: ["Mon", "Wed"],
@@ -56,13 +57,10 @@ function App() {
   const [tasks] = useState<Task[]>(defaultTasks);
 
   return (
-    <div style={{ fontFamily: "sans-serif", padding: "1rem" }}>
-      <h1>Course & Learning Planner</h1>
-
+    <Layout>
       <CourseList courses={courses} />
-
       <TaskList tasks={tasks} courses={courses} />
-    </div>
+    </Layout>
   );
 }
 
