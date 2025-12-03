@@ -65,10 +65,22 @@ const filteredTasks = tasks.filter((task) => {
   return task.status === taskFilter;
 });
 
+function handleToggleTaskStatus(id: string) {
+  setTasks((prev) =>
+    prev.map((task) =>
+      task.id === id
+        ? {
+            ...task,
+            status: task.status === "todo" ? "done" : "todo",
+          }
+        : task
+    )
+  );
+}
 
   return (
     <Layout>
-      
+
       <AddCourseForm
         onAddCourse={(course) => setCourses((prev) => [...prev, course])}
       />
@@ -78,7 +90,7 @@ const filteredTasks = tasks.filter((task) => {
         courses={courses}
         onAddTask={(task) => setTasks((prev) => [...prev, task])}
       />
-      <TaskList tasks={tasks} courses={courses} />
+      <TaskList tasks={tasks} courses={courses} onToggleStatus={handleToggleTaskStatus} />
 
       <TaskFilter value={taskFilter} onChange={setTaskFilter} />
     </Layout>
