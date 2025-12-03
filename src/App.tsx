@@ -6,6 +6,7 @@ import { TaskList } from "./Components/TaskList";
 import { Layout } from "./Components/Layout"
 import { AddCourseForm } from "./Components/AddCourseForm";
 import { AddTaskForm } from "./Components/AddTaskForm";
+import { TaskFilter } from "./Components/TaskFilter";
 
 const defaultCourses: Course[] = [
   {
@@ -57,18 +58,29 @@ const defaultTasks: Task[] = [
 function App() {
   const [courses, setCourses] = useState<Course[]>(defaultCourses);
   const [tasks, setTasks] = useState<Task[]>(defaultTasks);
+  const [taskFilter, setTaskFilter] = useState<"all" | "todo" | "done">("all");
+
+const filteredTasks = tasks.filter((task) => {
+  if (taskFilter === "all") return true;
+  return task.status === taskFilter;
+});
+
 
   return (
     <Layout>
+      
       <AddCourseForm
         onAddCourse={(course) => setCourses((prev) => [...prev, course])}
       />
       <CourseList courses={courses} />
+
       <AddTaskForm
         courses={courses}
         onAddTask={(task) => setTasks((prev) => [...prev, task])}
       />
       <TaskList tasks={tasks} courses={courses} />
+
+      <TaskFilter value={taskFilter} onChange={setTaskFilter} />
     </Layout>
   );
 }
