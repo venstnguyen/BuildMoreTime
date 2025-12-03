@@ -4,6 +4,8 @@ import type { Task } from "./Models/Task";
 import { CourseList } from "./Components/CourseList";
 import { TaskList } from "./Components/TaskList";
 import { Layout } from "./Components/Layout"
+import { AddCourseForm } from "./Components/AddCourseForm";
+import { AddTaskForm } from "./Components/AddTaskForm";
 
 const defaultCourses: Course[] = [
   {
@@ -53,12 +55,19 @@ const defaultTasks: Task[] = [
 ];
 
 function App() {
-  const [courses] = useState<Course[]>(defaultCourses);
-  const [tasks] = useState<Task[]>(defaultTasks);
+  const [courses, setCourses] = useState<Course[]>(defaultCourses);
+  const [tasks, setTasks] = useState<Task[]>(defaultTasks);
 
   return (
     <Layout>
+      <AddCourseForm
+        onAddCourse={(course) => setCourses((prev) => [...prev, course])}
+      />
       <CourseList courses={courses} />
+      <AddTaskForm
+        courses={courses}
+        onAddTask={(task) => setTasks((prev) => [...prev, task])}
+      />
       <TaskList tasks={tasks} courses={courses} />
     </Layout>
   );
