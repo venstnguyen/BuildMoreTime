@@ -7,6 +7,7 @@ import { Layout } from "./Components/Layout"
 import { AddCourseForm } from "./Components/AddCourseForm";
 import { AddTaskForm } from "./Components/AddTaskForm";
 import { TaskFilter } from "./Components/TaskFilter";
+import { DashboardSummary } from "./Components/DashboardSummary";
 
 const defaultCourses: Course[] = [
   {
@@ -80,6 +81,7 @@ function handleToggleTaskStatus(id: string) {
 
   return (
     <Layout>
+      <DashboardSummary tasks={tasks} />
 
       <AddCourseForm
         onAddCourse={(course) => setCourses((prev) => [...prev, course])}
@@ -93,6 +95,8 @@ function handleToggleTaskStatus(id: string) {
       <TaskList tasks={tasks} courses={courses} onToggleStatus={handleToggleTaskStatus} />
 
       <TaskFilter value={taskFilter} onChange={setTaskFilter} />
+
+
     </Layout>
   );
 }
