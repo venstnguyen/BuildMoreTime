@@ -1,73 +1,69 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-//Example Courses
+import React, { useState } from "react";
+import type { Course } from "./Models/Course";
+import type { Task } from "./Models/Task";
+import { CourseList } from "./Components/CourseList";
+import { TaskList } from "./Components/TaskList";
 
 const defaultCourses: Course[] = [
   {
-    id: "First Class",
+    id: "course1",
     name: "Algorithms",
-    code: "CSCI 411",
-    color: "Blue",
+    code: "CSCI 406",
+    color: "#1565c0",
     semester: "Fall 2024",
-    daysOfTheWeek: ["Monday", "Wednesday"],
-    startTime: "9:00",
-    endTime: "10:00",
-    location: "CSM"
+    daysOfTheWeek: ["Mon", "Wed"],
+    startTime: "10:00",
+    endTime: "11:30",
+    location: "Room 125A",
   },
-
   {
-    id: "Second Class",
-    name: "OS",
-    code: "CSCI 457",
-    color: "Green",
+    id: "course2",
+    name: "Database Systems",
+    code: "CSCI 432",
+    color: "#ff9800",
     semester: "Fall 2024",
-    daysOfTheWeek: ["Monday", "Wednesday"],
-    startTime: "11:00",
-    endTime: "12:00",
-    location: "CSM"
+    daysOfTheWeek: ["Tue", "Thu"],
+    startTime: "13:00",
+    endTime: "14:15",
+    location: "Room 220",
   },
 ];
-
-//Example Task
 
 const defaultTasks: Task[] = [
   {
     id: "task1",
-    courseId: ""
-  }
-]
-
+    courseId: "course1",
+    title: "Homework 1: Graphs",
+    type: "assignment",
+    dueDate: "2024-11-22",
+    estimatedMinutes: 120,
+    status: "todo",
+    priority: "high",
+  },
+  {
+    id: "task2",
+    courseId: "course2",
+    title: "Read: Normalization",
+    type: "reading",
+    dueDate: "2024-11-25",
+    estimatedMinutes: 30,
+    status: "todo",
+  },
+];
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [courses] = useState<Course[]>(defaultCourses);
+  const [tasks] = useState<Task[]>(defaultTasks);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ fontFamily: "sans-serif", padding: "1rem" }}>
+      <h1>Course & Learning Planner</h1>
+
+      <CourseList courses={courses} />
+
+      <TaskList tasks={tasks} courses={courses} />
+    </div>
+  );
 }
 
-export default App
+export default App;
